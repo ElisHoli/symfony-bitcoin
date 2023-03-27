@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use GuzzleHttp\Client;
 
 class CryptoController extends AbstractController
@@ -27,8 +26,8 @@ class CryptoController extends AbstractController
 
         // Vytvoříme pole s daty
         $data = [
-            'price_eur' => $data_eur->bpi->EUR->rate,
-            'price_usd' => $data_usd->bpi->USD->rate,
+            'price_eur' => number_format($data_eur->bpi->EUR->rate_float, 2, ',', ' '),
+            'price_usd' => number_format($data_usd->bpi->USD->rate_float, 2, '.', ','),
         ];
 
         // Vykreslíme šablonu a předáme jí data
