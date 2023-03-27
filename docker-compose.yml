@@ -9,6 +9,8 @@ services:
       dockerfile: php-dockerfile
     volumes:
       - '.:/var/www/html'
+    depends_on:
+      - mariadb
 
   # Nginx Service
   nginx:
@@ -22,3 +24,26 @@ services:
       - './nginx-conf:/etc/nginx/conf.d'
     depends_on:
       - php
+
+  # MariaDB Service
+  mariadb:
+    image: mariadb:10.9
+    environment:
+      MYSQL_ROOT_PASSWORD: your_password
+    volumes:
+      - mysqldata:/var/lib/mysql
+
+  # phpMyAdmin Service
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: mariadb
+    depends_on:
+      - mariadb
+
+# Volumes
+volumes:
+
+  mysqldata:

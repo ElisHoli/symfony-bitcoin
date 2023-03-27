@@ -5,5 +5,5 @@ controllers:
     type: attribute
 # config/routes.yaml
 index:
-    path: /
+    path: /hello
     controller: App\Controller\CryptoController::index
